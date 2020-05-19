@@ -12,7 +12,7 @@ class Paslauga(models.Model):
 
     class Meta:
         verbose_name = 'Paslauga'
-
+        verbose_name_plural = 'Paslaugos'
 
 class Automobilio_modelis(models.Model):
     metai = models.IntegerField('Metai')
@@ -23,14 +23,22 @@ class Automobilio_modelis(models.Model):
     def __str__(self):
         return f"{self.metai}, {self.marke} {self.modelis}, {self.variklis}"
 
+    class Meta:
+        verbose_name = 'Automobilio modelis'
+        verbose_name_plural = 'Automobilio modeliai'
+
 
 class Paslaugos_kaina(models.Model):
     paslauga_id = models.ForeignKey('Paslauga', on_delete=models.SET_NULL, null=True)
-    automobilis_ids = models.ManyToManyField(Automobilio_modelis, help_text='Išrinkite žanrą(us) šiai knygai')
+    automobilis_ids = models.ManyToManyField(Automobilio_modelis)
     kaina = models.FloatField("Kaina")
 
     def __str__(self):
         return f"{self.paslauga_id}: {self.kaina}"
+
+    class Meta:
+        verbose_name = 'Paslaugo kaina'
+        verbose_name_plural = 'Paslaugų kainos'
 
 
 class Automobilis(models.Model):
@@ -50,6 +58,10 @@ class Uzsakymas(models.Model):
     def __str__(self):
         return f"{self.automobilis_id}: {self.suma}"
 
+    class Meta:
+        verbose_name = 'Užsakymas'
+        verbose_name_plural = 'Užsakymai'
+
 
 class UzsakymoEilute(models.Model):
     uzsakymas_id = models.ForeignKey('Uzsakymas', on_delete=models.SET_NULL, null=True)
@@ -59,3 +71,7 @@ class UzsakymoEilute(models.Model):
 
     def __str__(self):
         return f"{self.paslauga_id} – {self.kiekis}: {self.kaina}"
+
+    class Meta:
+        verbose_name = 'Užsakymo eilutė'
+        verbose_name_plural = 'Užsakymo eilutės'
