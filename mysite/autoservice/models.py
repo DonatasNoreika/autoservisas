@@ -36,6 +36,11 @@ class Paslaugos_kaina(models.Model):
     def __str__(self):
         return f"{self.paslauga_id}: {self.kaina}"
 
+    def automobiliai(self):
+        return ', '.join(f"{auto.marke} {auto.modelis}" for auto in self.automobilis_ids.all())
+
+    automobiliai.short_description = 'Automobiliai'
+
     class Meta:
         verbose_name = 'Paslaugo kaina'
         verbose_name_plural = 'Paslaugų kainos'
@@ -50,6 +55,9 @@ class Automobilis(models.Model):
     def __str__(self):
         return f"{self.savininkas}: {self.automobilio_modelis_id}, {self.valstybinis_numeris}, {self.vin_kodas}"
 
+    class Meta:
+        verbose_name = 'Automobilis'
+        verbose_name_plural = 'Automobiliai'
 
 class Uzsakymas(models.Model):
     automobilis_id = models.ForeignKey('Automobilis', on_delete=models.SET_NULL, null=True)
