@@ -70,6 +70,21 @@ class Uzsakymas(models.Model):
         verbose_name = 'Užsakymas'
         verbose_name_plural = 'Užsakymai'
 
+    STATUS = (
+        ('p', 'Patvirtinta'),
+        ('v', 'Vykdoma'),
+        ('a', 'Atlikta'),
+        ('t', 'Atšaukta'),
+    )
+
+    status = models.CharField(
+        max_length=1,
+        choices=STATUS,
+        blank=True,
+        default='a',
+        help_text='Statusas',
+    )
+
 
 class UzsakymoEilute(models.Model):
     uzsakymas_id = models.ForeignKey('Uzsakymas', on_delete=models.SET_NULL, null=True)
