@@ -18,3 +18,10 @@ def index(request):
 
     # renderiname base.html, su duomenimis kintamąjame context
     return render(request, 'index.html', context=context)
+
+def automobiliai(request):
+    automobiliai = Automobilis.objects.all()
+    context = {
+        'automobiliai': automobiliai
+    }
+    return render(request, 'automobiliai.html', context=context)
