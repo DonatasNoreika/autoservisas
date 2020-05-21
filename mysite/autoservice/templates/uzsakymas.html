@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container author">
+    <p><strong>Automobilis:</strong> {{ uzsakymas.automobilis_id }}</p>
+    <p><strong>Suma:</strong> {{ uzsakymas.suma }}</p>
+    </hr>
+    </br>
+    </div>
+<div style="margin-left:20px;margin-top:20px">
+    <h4>Darbai:</h4>
+    {% for eilute in uzsakymas.uzsakymoeilute_set.all %}
+      <hr>
+        <p><strong>Paslauga:</strong> {{ eilute.paslauga_id }}  <strong>Kiekis:</strong> {{ eilute.kiekis }}<strong>    Kaina:</strong> {{ eilute.kaina }}</p>
+    {% endfor %}
+  </div>
+
+{% endblock %}

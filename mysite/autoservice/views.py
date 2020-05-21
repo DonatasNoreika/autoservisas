@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from django.http import HttpResponse
 from .models import Paslauga, Uzsakymas, Automobilis
+from django.views import generic
 
 def index(request):
     paslaugu_kiekis = Paslauga.objects.count()
@@ -29,3 +30,12 @@ def automobiliai(request):
 def automobilis(request, automobilis_id):
     automobilis = get_object_or_404(Automobilis, pk=automobilis_id)
     return render(request, 'automobilis.html', context={'automobilis': automobilis})
+
+class UzsakymaiListView(generic.ListView):
+    model = Uzsakymas
+    context_object_name = 'uzsakymai'
+    template_name = 'uzsakymai.html'
+
+class UzsakymasDetailView(generic.DetailView):
+    model = Uzsakymas
+    template_name = 'uzsakymas.html'
