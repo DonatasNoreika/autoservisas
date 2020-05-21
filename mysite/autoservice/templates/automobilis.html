@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container author">
+    <h4>{{ automobilis.automobilio_modelis_id.marke }} {{ automobilis.automobilio_modelis_id.modelis }}</h4>
+    <hr/>
+    <p><strong>Savininkas:</strong> {{ automobilis.savininkas }}</p>
+    <p><strong>Valstybinis numeris:</strong> {{ automobilis.valstybinis_numeris }}</p>
+    <p><strong>VIN kodas:</strong> {{ automobilis.vin_kodas }}</p>
+    </hr>
+    </br>
+    </div>
+{% endblock %}

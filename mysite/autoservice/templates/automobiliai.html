@@ -4,6 +4,6 @@
   <h1>Automobiliai</h1>
   <p>Mūsų servise registruoti automobiliai.</p>
   {% for automobilis in automobiliai %}
-    <li><a href="">{{automobilis}}</a></li>
+    <li><a href="{% url 'automobilis' automobilis.id %}">{{automobilis}}</a></li>
     {% endfor %}
 {% endblock %}

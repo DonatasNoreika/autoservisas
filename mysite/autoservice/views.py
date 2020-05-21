@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.http import HttpResponse
@@ -25,3 +25,7 @@ def automobiliai(request):
         'automobiliai': automobiliai
     }
     return render(request, 'automobiliai.html', context=context)
+
+def automobilis(request, automobilis_id):
+    automobilis = get_object_or_404(Automobilis, pk=automobilis_id)
+    return render(request, 'automobilis.html', context={'automobilis': automobilis})
