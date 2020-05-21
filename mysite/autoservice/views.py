@@ -6,7 +6,7 @@ from .models import Paslauga, Uzsakymas, Automobilis
 
 def index(request):
     paslaugu_kiekis = Paslauga.objects.count()
-    atliktu_uzsakymu_kiekis = num_instances_available = Uzsakymas.objects.filter(status__exact='a').count()
+    atliktu_uzsakymu_kiekis = Uzsakymas.objects.filter(status__exact='a').count()
     automobiliu_kiekis = Automobilis.objects.count()
 
     # perduodame informaciją į šabloną žodyno pavidale:

@@ -81,7 +81,7 @@ class Uzsakymas(models.Model):
         max_length=1,
         choices=STATUS,
         blank=True,
-        default='a',
+        default='p',
         help_text='Statusas',
     )
 
