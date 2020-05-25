@@ -44,7 +44,7 @@ def search(request):
     didžiosios/mažosios.
     """
     query = request.GET.get('query')
-    search_results = Automobilis.objects.filter(Q(savininkas__icontains=query) | Q(valstybinis_numeris__icontains=query) | Q(vin_kodas__icontains=query))
+    search_results = Automobilis.objects.filter(Q(savininkas__icontains=query) | Q(valstybinis_numeris__icontains=query) | Q(vin_kodas__icontains=query) | Q(automobilio_modelis_id__marke__icontains=query) | Q(automobilio_modelis_id__modelis__icontains=query))
     return render(request, 'search.html', {'automobiliai': search_results, 'query': query})
 
 
