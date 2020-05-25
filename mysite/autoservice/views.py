@@ -34,6 +34,7 @@ def automobilis(request, automobilis_id):
 class UzsakymaiListView(generic.ListView):
     model = Uzsakymas
     context_object_name = 'uzsakymai'
+    paginate_by = 5
     template_name = 'uzsakymai.html'
 
 class UzsakymasDetailView(generic.DetailView):
