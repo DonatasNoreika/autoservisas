@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from .models import Paslauga, Uzsakymas, Automobilis
 from django.views import generic
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 def index(request):
     paslaugu_kiekis = Paslauga.objects.count()
@@ -33,6 +34,19 @@ def automobiliai(request):
 def automobilis(request, automobilis_id):
     automobilis = get_object_or_404(Automobilis, pk=automobilis_id)
     return render(request, 'automobilis.html', context={'automobilis': automobilis})
+
+
+def search(request):
+    """
+    paprasta paieška. query ima informaciją iš paieškos laukelio,
+    search_results prafiltruoja pagal įvestą tekstą knygų pavadinimus ir aprašymus.
+    Icontains nuo contains skiriasi tuo, kad icontains ignoruoja ar raidės
+    didžiosios/mažosios.
+    """
+    query = request.GET.get('query')
+    search_results = Automobilis.objects.filter(Q(savininkas__icontains=query) | Q(valstybinis_numeris__icontains=query) | Q(vin_kodas__icontains=query))
+    return render(request, 'search.html', {'automobiliai': search_results, 'query': query})
+
 
 class UzsakymaiListView(generic.ListView):
     model = Uzsakymas
