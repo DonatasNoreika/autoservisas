@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Paslauga, Uzsakymas, Automobilis
 from django.views import generic
+from django.core.paginator import Paginator
 
 def index(request):
     paslaugu_kiekis = Paslauga.objects.count()
@@ -21,9 +22,11 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 def automobiliai(request):
-    automobiliai = Automobilis.objects.all()
+    paginator = Paginator(Automobilis.objects.all(), 5)
+    page_number = request.GET.get('page')
+    paged_automobiliai = paginator.get_page(page_number)
     context = {
-        'automobiliai': automobiliai
+        'automobiliai': paged_automobiliai
     }
     return render(request, 'automobiliai.html', context=context)
 
