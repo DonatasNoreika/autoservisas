@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {% load static %}
     <div class="container">
+    {% if automobilis.photo %}
+      <img src="{{ automobilis.photo.url }}" class="card-img-top" alt="...">
+    {% else %}
+      <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+    {% endif %}
     <h4>{{ automobilis.automobilio_modelis_id.marke }} {{ automobilis.automobilio_modelis_id.modelis }}</h4>
     <hr/>
     <p><strong>Savininkas:</strong> {{ automobilis.savininkas }}</p>
