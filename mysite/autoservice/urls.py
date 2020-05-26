@@ -11,3 +11,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('search/<int:automobilis_id>', views.automobilis, name='automobilis'),
 ]
+
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
+]
