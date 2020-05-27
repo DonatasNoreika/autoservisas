@@ -2,6 +2,11 @@ from django.db import models
 
 # Create your models here.
 from django.db import models
+from django.contrib.auth.models import User
+from datetime import datetime
+import pytz
+
+utc=pytz.UTC
 
 
 class Paslauga(models.Model):
@@ -62,10 +67,26 @@ class Automobilis(models.Model):
 
 class Uzsakymas(models.Model):
     automobilis_id = models.ForeignKey('Automobilis', on_delete=models.SET_NULL, null=True)
+    klientas_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    grazinimo_laikas = models.DateTimeField('Gražinimo terminas', null=True, blank=True)
     suma = models.FloatField("Suma")
 
     def __str__(self):
         return f"{self.automobilis_id}: {self.suma}"
+
+    # @property
+    # def praejes_terminas(self):
+    #     if self.grazinimo_laikas:
+    #         start_time = self.grazinimo_laikas.replace(tzinfo=utc)
+    #         end_time = datetime.today().replace(tzinfo=utc)
+    #         print("Datos:", start_time, end_time)
+    #     return self.grazinimo_laikas and end_time > start_time
+
+    @property
+    def praejes_terminas(self):
+        if self.grazinimo_laikas and datetime.today().replace(tzinfo=utc) > self.grazinimo_laikas.replace(tzinfo=utc):
+            return True
+        return False
 
     class Meta:
         verbose_name = 'Užsakymas'

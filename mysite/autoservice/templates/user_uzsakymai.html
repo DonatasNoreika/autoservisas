@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Mano užsakymai</h1>
+
+    {% if uzsakymas_list %}
+    <ul>
+
+      {% for uzsakymas in uzsakymas_list %}
+      <li class="{% if uzsakymas.praejes_terminas %}text-danger{% endif %}">
+        <a href="{% url 'uzsakymas' uzsakymas.pk %}">{{uzsakymas.automobilis_id}}</a> ({{ uzsakymas.klientas_id }}) ({{ uzsakymas.suma }})
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>There are no books borrowed.</p>
+    {% endif %}
+{% endblock %}

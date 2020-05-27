@@ -6,6 +6,8 @@ from .models import Paslauga, Uzsakymas, Automobilis
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 def index(request):
     paslaugu_kiekis = Paslauga.objects.count()
@@ -62,3 +64,12 @@ class UzsakymaiListView(generic.ListView):
 class UzsakymasDetailView(generic.DetailView):
     model = Uzsakymas
     template_name = 'uzsakymas.html'
+
+
+class UzsakymaiByUserListView(LoginRequiredMixin, generic.ListView):
+    model = Uzsakymas
+    template_name = 'user_uzsakymai.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Uzsakymas.objects.filter(klientas_id=self.request.user).order_by('grazinimo_laikas')
