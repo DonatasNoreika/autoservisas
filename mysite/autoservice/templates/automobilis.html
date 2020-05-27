@@ -13,6 +13,10 @@
     <p><strong>Savininkas:</strong> {{ automobilis.savininkas }}</p>
     <p><strong>Valstybinis numeris:</strong> {{ automobilis.valstybinis_numeris }}</p>
     <p><strong>VIN kodas:</strong> {{ automobilis.vin_kodas }}</p>
+    {% if automobilis.aprasymas %}
+        <h3>Aprašymas:</h3>
+        <p>{{ automobilis.aprasymas | safe }}</p>
+        {% endif %}
     </hr>
     </br>
     </div>
