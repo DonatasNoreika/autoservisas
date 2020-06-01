@@ -122,3 +122,13 @@ class UzsakymoEilute(models.Model):
     class Meta:
         verbose_name = 'Užsakymo eilutė'
         verbose_name_plural = 'Užsakymo eilutės'
+
+class UzsakymoKomentaras(models.Model):
+    uzsakymas_id = models.ForeignKey('Uzsakymas', on_delete=models.SET_NULL, null=True)
+    klientas_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    komentaras = models.TextField('Komentaras', max_length=2000)
+
+    class Meta:
+        verbose_name = 'Komentaras'
+        verbose_name_plural = 'Komentarai'

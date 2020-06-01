@@ -15,4 +15,16 @@
     {% endfor %}
   </div>
 
+</br>
+  <h4>Komentarai:</h4>
+  {% if uzsakymas.uzsakymokomentaras_set.all %}
+    {% for komentaras in uzsakymas.uzsakymokomentaras_set.all %}
+      <hr>
+      <strong>{{ komentaras.klientas_id }}</strong>, <em>{{ komentaras.date_created}}</em>
+      <p>{{ komentaras.komentaras }}</p>
+    {% endfor %}
+  {% else %}
+    <p>Užsakymas neturi komentarų</p>
+  {% endif %}
+
 {% endblock %}
