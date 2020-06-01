@@ -71,7 +71,14 @@ class Uzsakymas(models.Model):
     automobilis_id = models.ForeignKey('Automobilis', on_delete=models.SET_NULL, null=True)
     klientas_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     grazinimo_laikas = models.DateTimeField('Gražinimo terminas', null=True, blank=True)
-    suma = models.FloatField("Suma")
+
+    @property
+    def suma(self):
+        uzsakymo_eilutes = UzsakymoEilute.objects.filter(uzsakymas_id=self.id)
+        suma = 0
+        for eilute in uzsakymo_eilutes:
+            suma += eilute.kiekis * eilute.kaina
+        return suma
 
     def __str__(self):
         return f"{self.automobilis_id}: {self.suma}"
@@ -115,6 +122,10 @@ class UzsakymoEilute(models.Model):
     paslauga_id = models.ForeignKey('Paslauga', on_delete=models.SET_NULL, null=True)
     kiekis = models.IntegerField("Kiekis")
     kaina = models.FloatField("Kaina")
+
+    @property
+    def suma(self):
+        return self.kiekis * self.kaina
 
     def __str__(self):
         return f"{self.paslauga_id} – {self.kiekis}: {self.kaina}"
