@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Paslauga, Automobilio_modelis, Paslaugos_kaina, Automobilis, Uzsakymas, UzsakymoEilute, UzsakymoKomentaras
+from .models import Paslauga, Automobilio_modelis, Paslaugos_kaina, Automobilis, Uzsakymas, UzsakymoEilute, UzsakymoKomentaras, Profilis
 
 
 class UzsakymoEilutesInline(admin.TabularInline):
@@ -32,4 +32,5 @@ admin.site.register(Automobilis, AutomobilisAdmin)
 admin.site.register(Uzsakymas, UzsakymasAdmin)
 admin.site.register(UzsakymoEilute)
 admin.site.register(UzsakymoKomentaras, UzsakymoKomentarasAdmin)
+admin.site.register(Profilis)
 

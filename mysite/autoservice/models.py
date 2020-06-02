@@ -7,7 +7,7 @@ from datetime import datetime
 import pytz
 from tinymce.models import HTMLField
 
-utc=pytz.UTC
+utc = pytz.UTC
 
 
 class Paslauga(models.Model):
@@ -19,6 +19,7 @@ class Paslauga(models.Model):
     class Meta:
         verbose_name = 'Paslauga'
         verbose_name_plural = 'Paslaugos'
+
 
 class Automobilio_modelis(models.Model):
     metai = models.IntegerField('Metai')
@@ -66,6 +67,7 @@ class Automobilis(models.Model):
     class Meta:
         verbose_name = 'Automobilis'
         verbose_name_plural = 'Automobiliai'
+
 
 class Uzsakymas(models.Model):
     automobilis_id = models.ForeignKey('Automobilis', on_delete=models.SET_NULL, null=True)
@@ -134,6 +136,7 @@ class UzsakymoEilute(models.Model):
         verbose_name = 'Užsakymo eilutė'
         verbose_name_plural = 'Užsakymo eilutės'
 
+
 class UzsakymoKomentaras(models.Model):
     uzsakymas_id = models.ForeignKey('Uzsakymas', on_delete=models.SET_NULL, null=True)
     klientas_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
@@ -143,3 +146,16 @@ class UzsakymoKomentaras(models.Model):
     class Meta:
         verbose_name = 'Komentaras'
         verbose_name_plural = 'Komentarai'
+
+
+class Profilis(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    nuotrauka = models.ImageField(default="default.png", upload_to="profile_pics")
+
+    def __str__(self):
+        return f"{self.user.username} profilis"
+
+
+    class Meta:
+        verbose_name = 'Profilis'
+        verbose_name_plural = 'Profiliai'
