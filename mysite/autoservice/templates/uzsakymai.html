@@ -3,14 +3,22 @@
 {% block content %}
   <h1>Užsakymų sąrašas</h1>
   {% if uzsakymai %}
-  <ul>
-    {% for uzsakymas in uzsakymai %}
-      <li>
-          <a href="{{ uzsakymas.id }}">{{ uzsakymas }}</a>
-      </li>
-
-    {% endfor %}
-  </ul>
+ <div class="row">
+      {% for uzsakymas in uzsakymai %}
+        <div class="col-md-4 d-flex align-items-stretch">
+          <div class="card mb-4 shadow-sm">
+              <img src="{{ uzsakymas.klientas_id.profilis.nuotrauka.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text"><a href="">{{ uzsakymas.automobilis_id.automobilio_modelis_id.marke }} {{ automobilis.automobilis_id.automobilio_modelis_id.modelis }}</a></p>
+                <h6 class="card-subtitle mb-2 text-muted"></h6>
+              <h6 class="card-subtitle mb-2 text-muted">{{ uzsakymas.savininkas }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ uzsakymas.klientas_id.username }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ uzsakymas.grazinimo_laikas|date:"Y-m-d, f" }}</h6>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
   {% else %}
     <p>Užsakymų nėra.</p>
 
