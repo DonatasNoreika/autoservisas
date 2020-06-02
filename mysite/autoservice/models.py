@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from datetime import datetime
 import pytz
 from tinymce.models import HTMLField
+from PIL import Image
 
 utc = pytz.UTC
 
@@ -159,3 +160,11 @@ class Profilis(models.Model):
     class Meta:
         verbose_name = 'Profilis'
         verbose_name_plural = 'Profiliai'
+
+    def save(self):
+        super().save()
+        img = Image.open(self.nuotrauka.path)
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.nuotrauka.path)
