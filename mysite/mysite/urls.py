@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', RedirectView.as_view(url='autoservice/', permanent=True)),
     path('tinymce/', include('tinymce.urls')),
+    path(r'^i18n/', include('django.conf.urls.i18n')),
 ] + (static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
 

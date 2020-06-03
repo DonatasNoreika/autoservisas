@@ -8,6 +8,7 @@ import pytz
 from tinymce.models import HTMLField
 from PIL import Image
 # import computed_property
+from django.utils.translation import gettext_lazy as _
 
 utc = pytz.UTC
 
@@ -56,19 +57,19 @@ class Paslaugos_kaina(models.Model):
 
 
 class Automobilis(models.Model):
-    savininkas = models.CharField('Savininkas', max_length=200)
-    automobilio_modelis_id = models.ForeignKey('Automobilio_modelis', on_delete=models.SET_NULL, null=True)
-    valstybinis_numeris = models.CharField('Valstybinis numeris', max_length=200)
-    vin_kodas = models.CharField('VIN kodas', max_length=200)
-    photo = models.ImageField('Nuotrauka', upload_to='autos', null=True)
-    aprasymas = HTMLField("Aprašymas", null=True)
+    savininkas = models.CharField(_('Owner'), max_length=200)
+    automobilio_modelis_id = models.ForeignKey('Automobilio_modelis', verbose_name=_("Vehicle"), on_delete=models.SET_NULL, null=True)
+    valstybinis_numeris = models.CharField(_('Licence plate'), max_length=200)
+    vin_kodas = models.CharField(_('VIN code'), max_length=200)
+    photo = models.ImageField(_('Photo'), upload_to='autos', null=True)
+    aprasymas = HTMLField(_("Summary"), null=True)
 
     def __str__(self):
         return f"{self.savininkas}: {self.automobilio_modelis_id}, {self.valstybinis_numeris}, {self.vin_kodas}"
 
     class Meta:
-        verbose_name = 'Automobilis'
-        verbose_name_plural = 'Automobiliai'
+        verbose_name = _('Vehicle')
+        verbose_name_plural = _('Vehicles')
 
 
 class Uzsakymas(models.Model):

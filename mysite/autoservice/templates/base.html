@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-
+{% load i18n %}
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
   <div class="container">
@@ -50,6 +50,21 @@
             <li class="nav-item"><a class="nav-link" href="{% url 'register'%}">Registruotis</a></li>
           {% endif %}
         </ul>
+
+      <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ redirect_to }}"/>
+        <select name="language">
+          {% get_current_language as LANGUAGE_CODE %}
+          {% get_available_languages as LANGUAGES %}
+          {% for lang in LANGUAGES %}
+          <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %} selected="selected" {% endif %}>
+            {{ lang.1 }} ({{ lang.0 }})
+          </option>
+          {% endfor %}
+        </select>
+        <input type="submit" value="Go"/>
+      </form>
       <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="get">
         <input class="form-control mr-sm-2" type="search" placeholder="Paieška" aria-label="Search" name="query">
         <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Ieškoti</button>
