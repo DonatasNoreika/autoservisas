@@ -7,8 +7,7 @@ from datetime import datetime
 import pytz
 from tinymce.models import HTMLField
 from PIL import Image
-# from computed_property import ComputedFloatField
-import computed_property
+# import computed_property
 
 utc = pytz.UTC
 
@@ -127,10 +126,10 @@ class UzsakymoEilute(models.Model):
     paslauga_id = models.ForeignKey('Paslauga', on_delete=models.SET_NULL, null=True)
     kiekis = models.IntegerField("Kiekis")
     kaina = models.FloatField("Kaina")
-    suma = computed_property.ComputedFloatField(compute_from='suma_calculation', null=True)
+    # suma = computed_property.ComputedFloatField(compute_from='suma_calculation', null=True)
 
     @property
-    def suma_calculation(self):
+    def suma(self):
         return self.kiekis * self.kaina
 
     def __str__(self):
