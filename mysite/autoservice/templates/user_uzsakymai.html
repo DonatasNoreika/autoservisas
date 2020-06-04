@@ -4,15 +4,19 @@
     <h1>Mano užsakymai</h1>
 
     {% if uzsakymas_list %}
-    <ul>
-
       {% for uzsakymas in uzsakymas_list %}
-      <li class="{% if uzsakymas.praejes_terminas %}text-danger{% endif %}">
-        <a href="{% url 'uzsakymas' uzsakymas.pk %}">{{uzsakymas.automobilis_id}}</a> ({{ uzsakymas.klientas_id }}) ({{ uzsakymas.suma }})
-      </li>
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2">{{ uzsakymas.klientas_id }}</a>
+              <small class="text-muted">{{ uzsakymas.grazinimo_laikas|date:"Y-m-d, f" }}</small>
+            </div>
+            <p class="article-content">{{ uzsakymas.automobilis_id}}</p>
+              <p class="card-text"><a href="{{ uzsakymas.id }}">Peržiūrėti</a></p>
+          </div>
+        </article>
+        <hr>
       {% endfor %}
-    </ul>
-
     {% else %}
       <p>Neturite užsakymų.</p>
     {% endif %}

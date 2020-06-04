@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Mano užsakymas</h1>
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2">{{ object.klientas_id }}</a>
+              <small class="text-muted">{{ object.grazinimo_laikas|date:"Y-m-d, f" }}</small>
+            </div>
+            <p class="article-content">{{ object.automobilis_id}}</p>
+          </div>
+        </article>
+{% endblock %}

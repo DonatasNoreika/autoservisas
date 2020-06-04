@@ -126,3 +126,8 @@ class UzsakymaiByUserListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return Uzsakymas.objects.filter(klientas_id=self.request.user).order_by('grazinimo_laikas')
+
+class UzsakymaiByUserDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Uzsakymas
+    template_name = 'user_uzsakymas.html'
+
