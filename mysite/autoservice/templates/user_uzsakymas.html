@@ -9,6 +9,11 @@
               <small class="text-muted">{{ object.grazinimo_laikas|date:"Y-m-d, f" }}</small>
             </div>
             <p class="article-content">{{ object.automobilis_id}}</p>
+            {% if object.klientas_id == user %}
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'redaguoti-mano-uzsakyma' object.id %}">Redaguoti</a>
+            </div>
+            {% endif %}
           </div>
         </article>
 {% endblock %}

@@ -6,7 +6,7 @@ from .models import Paslauga, Uzsakymas, Automobilis
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from django.contrib.auth.forms import User
 from django.views.decorators.csrf import csrf_protect
@@ -140,3 +140,17 @@ class UzsakymaiByUserCreateView(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.klientas_id = self.request.user
         return super().form_valid(form)
+
+class UzsakymaiByUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    model = Uzsakymas
+    fields = ['automobilis_id', 'grazinimo_laikas']
+    success_url = "/autoservice/manouzsakymai/"
+    template_name = 'user_uzsakymas_form.html'
+
+    def form_valid(self, form):
+        form.instance.klientas_id = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        uzsakymas = self.get_object()
+        return self.request.user == uzsakymas.klientas_id
