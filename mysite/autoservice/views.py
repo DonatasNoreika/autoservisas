@@ -131,3 +131,12 @@ class UzsakymaiByUserDetailView(LoginRequiredMixin, generic.DetailView):
     model = Uzsakymas
     template_name = 'user_uzsakymas.html'
 
+class UzsakymaiByUserCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Uzsakymas
+    fields = ['automobilis_id', 'grazinimo_laikas']
+    success_url = "/autoservice/manouzsakymai/"
+    template_name = 'user_uzsakymas_form.html'
+
+    def form_valid(self, form):
+        form.instance.klientas_id = self.request.user
+        return super().form_valid(form)
