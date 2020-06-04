@@ -59,7 +59,7 @@
           {% get_available_languages as LANGUAGES %}
           {% for lang in LANGUAGES %}
           <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %} selected="selected" {% endif %}>
-            {{ lang.1 }} ({{ lang.0 }})
+            {{ lang.1 }}
           </option>
           {% endfor %}
         </select>
