@@ -15,7 +15,6 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserUpdateForm, ProfilisUpdateForm
 from django.utils.translation import gettext as _
 
-
 def index(request):
     paslaugu_kiekis = Paslauga.objects.count()
     atliktu_uzsakymu_kiekis = Uzsakymas.objects.filter(status__exact='a').count()
@@ -143,13 +142,23 @@ class UzsakymaiByUserCreateView(LoginRequiredMixin, generic.CreateView):
 
 class UzsakymaiByUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Uzsakymas
-    fields = ['automobilis_id', 'grazinimo_laikas']
+    fields = ['automobilis_id', 'grazinimo_laikas', 'grazinimo_laikas']
     success_url = "/autoservice/manouzsakymai/"
     template_name = 'user_uzsakymas_form.html'
+
 
     def form_valid(self, form):
         form.instance.klientas_id = self.request.user
         return super().form_valid(form)
+
+    def test_func(self):
+        uzsakymas = self.get_object()
+        return self.request.user == uzsakymas.klientas_id
+
+class UzsakymaiByUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    model = Uzsakymas
+    success_url = "/autoservice/manouzsakymai/"
+    template_name = 'user_uzsakymas_istrinti.html'
 
     def test_func(self):
         uzsakymas = self.get_object()

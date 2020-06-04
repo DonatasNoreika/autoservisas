@@ -123,7 +123,7 @@ class Uzsakymas(models.Model):
 
 
 class UzsakymoEilute(models.Model):
-    uzsakymas_id = models.ForeignKey('Uzsakymas', on_delete=models.SET_NULL, null=True)
+    uzsakymas_id = models.ForeignKey('Uzsakymas', related_name='eilutes', on_delete=models.SET_NULL, null=True)
     paslauga_id = models.ForeignKey('Paslauga', on_delete=models.SET_NULL, null=True)
     kiekis = models.IntegerField("Kiekis")
     kaina = models.FloatField("Kaina")
