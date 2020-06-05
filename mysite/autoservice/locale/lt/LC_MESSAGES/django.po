@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-03 12:58+0300\n"
-"PO-Revision-Date: 2020-06-03 12:59+0300\n"
+"POT-Creation-Date: 2020-06-05 09:46+0300\n"
+"PO-Revision-Date: 2020-06-05 09:47+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -48,6 +48,14 @@ msgstr "Aprašymas"
 msgid "Vehicles"
 msgstr "Automobiliai"
 
+#: .\templates\base.html:47
+msgid "New"
+msgstr "Naujas"
+
+#: .\templates\base.html:70 .\templates\base.html:71
+msgid "Search"
+msgstr "Ieškoti"
+
 #: .\templates\index.html:4
 msgid "Autoservice"
 msgstr "Autoservisas"
@@ -76,16 +84,19 @@ msgstr "Automobiliai:"
 msgid "Your visits"
 msgstr "Jūsų apsilankymai"
 
-#: .\views.py:76
+#: .\views.py:75
 #, python-format
 msgid "Username %(username)s already exists!"
 msgstr "Vardas %(username)s užimtas!"
 
-#: .\views.py:81
+#: .\views.py:80
 #, python-format
 msgid "Email %(email)s already exists!"
 msgstr "El. pašto adresas %(email)s užimtas!"
 
-#: .\views.py:87
+#: .\views.py:86
 msgid "Passwords do not match!"
 msgstr "Slaptažodžiai nesutampa!"
+
+#~ msgid "Paieška"
+#~ msgstr "Search"

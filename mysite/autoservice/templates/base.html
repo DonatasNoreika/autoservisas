@@ -67,8 +67,8 @@
         <input type="submit" value="Go"/>
       </form>
       <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="get">
-        <input class="form-control mr-sm-2" type="search" placeholder="Paieška" aria-label="Search" name="query">
-        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Ieškoti</button>
+        <input class="form-control mr-sm-2" type="search" placeholder="{% blocktrans %}Search{% endblocktrans %}" aria-label="Search" name="query">
+        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">{% trans "Search" %}</button>
       </form>
     </div>
   </div>

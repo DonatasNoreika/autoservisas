@@ -121,7 +121,6 @@ class UzsakymasDetailView(generic.DetailView):
 class UzsakymaiByUserListView(LoginRequiredMixin, generic.ListView):
     model = Uzsakymas
     template_name = 'user_uzsakymai.html'
-    paginate_by = 10
 
     def get_queryset(self):
         return Uzsakymas.objects.filter(klientas_id=self.request.user).order_by('grazinimo_laikas')
