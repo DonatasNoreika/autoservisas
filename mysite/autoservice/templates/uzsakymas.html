@@ -9,7 +9,7 @@
     </div>
 <div style="margin-left:20px;margin-top:20px">
     <h4>Darbai:</h4>
-    {% for eilute in uzsakymas.uzsakymoeilute_set.all %}
+    {% for eilute in uzsakymas.eilutes.all %}
       <hr>
         <p><strong>Paslauga:</strong> {{ eilute.paslauga_id }}  <strong>Kiekis:</strong> {{ eilute.kiekis }}<strong>    Kaina:</strong> {{ eilute.kaina }} <strong>    Suma:</strong> {{ eilute.suma }}</p>
     {% endfor %}
